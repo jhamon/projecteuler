@@ -4,7 +4,7 @@ from operator import mul
 
 
 def tri(n):
-    return sum(range(1, n + 1))
+    return n*(n+1)/2
 
 primelist = [2, 3]
 i = 5
