@@ -1,3 +1,6 @@
+# How many letters are needed to write out the name
+# of numbers from 1 to 1000, following the British usage of
+# including "and" all over the place. e.g. one hundred AND five.
 ns = {
     '1': 'one',
     '2': 'two',
