@@ -24,17 +24,17 @@ def prime_tree(n):
     return factors
 
 # List of lists containing the factors of each number up to 20
-factorlist = [prime_tree(i) for i in range(2, 21)]
+factorlist = [prime_tree(i) for i in xrange(2, 21)]
 
 # Count number of times each factor occurs in each list
 countexp = [map(x.count, divisors) for x in factorlist]
 
 # Find the exponent for each prime term
-exponents = map(max, [[countexp[i][j] for i in range(
-    0, len(countexp))] for j in range(0, len(divisors))])
+exponents = map(max, [[countexp[i][j] for i in xrange(
+    0, len(countexp))] for j in xrange(0, len(divisors))])
 
 # Now put everything together again
 lcm = reduce(
-    mul, [divisors[i] ** exponents[i] for i in range(0, len(divisors))], 1)
+    mul, [divisors[i] ** exponents[i] for i in xrange(0, len(divisors))], 1)
 
 print lcm

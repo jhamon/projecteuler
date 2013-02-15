@@ -14,4 +14,4 @@ def namescore(name):
 	return score
 
 namescores = map(namescore,data)
-print sum([(i+1)*namescores[i] for i in range(0,len(data))])
+print sum([(i+1)*namescores[i] for i in xrange(0,len(data))])

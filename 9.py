@@ -7,7 +7,7 @@
 
 from itertools import permutations
 from math import sqrt
-b = range(1,500)
+b = xrange(1,500)
 perms = permutations(b,2)
 for p in perms:
 	if p[1] > p[0]:
