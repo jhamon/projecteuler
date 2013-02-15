@@ -4,13 +4,13 @@
 
 def check_max(n):
     n = max(n)
-    keepgoing = True
     i = int(n ** 0.5)
-    while keepgoing:
+    while True:
         if n % i == 0:
             return (i, n / i)
         elif i == 1:
-            keepgoing = False
+            i = i - 1
+            break
         i = i - 1
     return (n, 1)
 
@@ -24,13 +24,12 @@ def recur_check(n):
 
 a = 600851475143
 prime_factors = [1]
-keepgoing = True
 start = a / max(prime_factors)
-while keepgoing:
+while True:
     next = check_max((1, start))
     next2 = recur_check(next)
     start = start / max(next2)
     if max(next2) == max(next):
         print 'answer:', max(next2)
         print 'factors:', prime_factors
-        keepgoing = False
+        break
