@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from math import sqrt
+from itertools import count
 
 def is_prime(x):
 	""" Slow method for determining whether a number is prime
@@ -20,6 +21,11 @@ def is_prime(x):
 		return True 
 
 
+def divisible(a, b):
+    """Returns true if a divisible by b"""
+    return not (a % b)
+
+
 def gcd(x, y):
 	""" returns greatest common divisor """
 	if x < y:
@@ -31,5 +37,20 @@ def gcd(x, y):
 
 def lcm(x, y):
 	""" returns the least common multiple """
-
 	return x * y / gcd(x, y)
+
+odd_gen = count(3, 2)
+def prime_generator():
+    """ Generator function emits one prime at a time"""
+    genprimelist = [2]
+    def _is_prime(n):
+        factors = [n % x for x in genprimelist if x <= sqrt(n)]
+        if 0 in factors:
+        	return False
+        else:
+        	return True
+
+    for x in odd_gen:
+        if _is_prime(x):
+            genprimelist.append(x)
+            yield x
