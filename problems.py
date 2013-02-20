@@ -4,7 +4,7 @@ import helpers as help
 from operator import mul
 from math import sqrt, log
 from itertools import count
-import numpy as np
+from numpy import loadtxt
 
 
 def problem1():
@@ -23,20 +23,19 @@ def problem2():
     return sum([x for x in fibs if x % 2 == 0])
 
 
-def problem3():
-    """What is the largest prime factor of the number 600851475143 ?
+def problem3(N=600851475143):
+    """What is the largest prime factor of the number N = 600851475143 ?
 
     This solution will make use of the fact that a number is prime if it
     has no prime factors smaller than sqrt(n). Potential factors are checked
     from high to low, decrementing by 2 because N is not even.
     """
-
-    N = 600851475143
-    factors = [x for x in range(2,N) if help.divisible(N,x)]
-    for x in factors[::-1]:
-        if help.is_prime(x):
-            return x
-
+    check_factor = int(sqrt(N))
+    while True:
+        if help.divisible(N,check_factor) and help.is_prime(check_factor):
+            return check_factor
+        else:
+            check_factor -= 1
 
 def problem4():
     """Find the largest palindrome formed as the product of
@@ -127,7 +126,7 @@ def problem10():
 
 
 def problem11():
-    data = np.loadtxt('11.txt')
+    data = loadtxt('11.txt')
     # vertical
     v = max([reduce(mul, data[i:i + 4, j]) for i in xrange(0, 20 - 3) for j in xrange(0, 20)])
 
@@ -221,7 +220,7 @@ def problem12():
 def problem13():
     """Work out the first ten digits of the sum of the one-hundred
     50-digit numbers stored in 13.dat."""
-    data = np.loadtxt('13.dat')
+    data = loadtxt('13.dat')
     bigsum = sum(data)
     return int(''.join(str(bigsum)[0:11].split('.')))
 
