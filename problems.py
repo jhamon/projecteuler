@@ -53,8 +53,11 @@ def problem4():
 
 
 def problem5():
-    pass
-
+    """This problem asks us to find the least common multiple of all numbers less than 20."""
+    mult = 1
+    for x in range(1,20):
+        mult = help.lcm(mult,x)
+    return mult
 
 def problem6():
     """ Find the difference between the sum of the squares of the first
