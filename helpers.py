@@ -19,3 +19,17 @@ def is_prime(x):
 	else:
 		return True 
 
+
+def gcd(x, y):
+	""" returns greatest common divisor """
+	if x < y:
+		x, y = y, x
+
+	while y:
+		x, y = y, x % y
+	return x
+
+def lcm(x, y):
+	""" returns the least common multiple """
+
+	return x * y / gcd(x, y)
