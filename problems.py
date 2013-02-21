@@ -1,11 +1,10 @@
 #!/usr/bin/python
 from __future__ import division
-import helpers as help
+import helpers as h
 from operator import mul
 from math import sqrt, log
 from itertools import count
 from numpy import loadtxt
-
 
 def problem1():
     """Print the sum of the numbers less than 1000 which are
@@ -32,7 +31,7 @@ def problem3(N=600851475143):
     """
     check_factor = int(sqrt(N))
     while True:
-        if help.divisible(N,check_factor) and help.is_prime(check_factor):
+        if h.divisible(N,check_factor) and h.is_prime(check_factor):
             return check_factor
         else:
             check_factor -= 1
@@ -56,7 +55,7 @@ def problem5():
     """This problem asks us to find the least common multiple of all numbers less than 20."""
     mult = 1
     for x in range(1,20):
-        mult = help.lcm(mult,x)
+        mult = h.lcm(mult,x)
     return mult
 
 def problem6():
@@ -75,7 +74,7 @@ def problem7():
     primelist = [2, 3]
     i = 5
     while len(primelist) < 10001:
-        if help.is_prime(i):
+        if h.is_prime(i):
             primelist.append(i)
         i = i + 2  # increment by 2, to check odds only
     return primelist[-1]
@@ -123,7 +122,7 @@ def problem9():
 def problem10():
     """Find the sum of all primes smaller than 2 million"""
 
-    primelist = [i for i in xrange(3, 2000000, 2) if help.is_prime(i)]
+    primelist = [i for i in xrange(3, 2000000, 2) if h.is_prime(i)]
     primelist.insert(0, 2)  # 2 is the smallest prime
     return sum(primelist)
 
@@ -145,78 +144,18 @@ def problem11():
     return max([v, h, diag1, diag2])
 
 
-def problem12():
-    """Problem: find the first triangular number with more
-    than 500 factors.
+# def problem12():
+#     """Problem: find the first triangular number with more
+#     than 500 factors.
+#     """
 
-    We need to know that a number with prime factorization
-    of the form n^a*p^b*q*c will have (a+1)(b+1)(c+1) factors.
-    This general pattern holds true even for numbers with many
-    prime factors."""
-
-    PRIME_LIST_MAX = 10000
-
-    def tri(n):
-        """ Returns the nth triangular number"""
-        return n * (n + 1) / 2
-
-    def triangle_generator():
-        """ triangular number generator """
-        for n in count(3, 1):
-            yield n * (n + 1) / 2
-
-    def gen_primes_less_than_p(p):
-        """ Returns a list of prime numbers smaller than p
-        Generating a list of primes for use by other functions
-        prevents having to recheck for primeness."""
-        primelist = [i for i in xrange(3, p, 2) if is_prime(i)]
-        primelist.insert(0, 2)  # 2 is the smallest prime
-        return primelist
-
-        primelist = gen_primes_less_than_p(PRIME_LIST_MAX)
-
-    def prime_factorization_tree(n):
-        """ prime_factorization_tree(n) returns a list containing (base, exponent)
-        tuples that make up the prime factorization of n"""
-
-        divisible = help.divisible
-
-        def get_factor_exponent(a, b):
-            """ For factor b of a, returns the highest
-            power of b that is divisible into a """
-            max_power_possible = int(log(a, b)) + 1
-
-            for i in xrange(max_power_possible, 0, -1):
-                print 'Checking {0} / {1}**{2}'.format(a, b, i)
-                if not a % (b ** i):
-                    return i
-                else:
-                    print '{0} is not divisible by {1}'.format(a, b)
-
-                    prime_factors = [x for x in primelist if x <= n and divisible(n, x)]
-                    remainder = n
-                    exponents = []
-
-                    for factor in prime_factors[::-1]:  # Do big factors first
-                        power = get_factor_exponent(remainder, factor)
-                        exponents.insert(0, power)
-                        remainder = int(remainder / (factor ** power))
-
-                    return zip(prime_factors, exponents)
-
-    def number_of_factors(factorization):
-        """ Takes tuple list output of prime_factorization_tree and returns
-        the number of factors that number has. """
-        return reduce(mul, [x[1] + 1 for x in factorization])
-
-    nof = 0
-    triangle = triangle_generator()
-
-    for tri in triangle:
-        primefac = prime_factorization_tree(tri)
-        nof = number_of_factors(primefac)
-        if nof > 500:
-            return int(tri)
+#     nof = 0
+#     i = 1
+#     while nof < 500:
+#         nof = h.number_of_factors(h.tri(i))
+#         print i, nof
+#         i += 1
+#     return tri
             
 
 
@@ -382,4 +321,3 @@ def problem30():
 
     return sum(winners)
 
-# def problem
